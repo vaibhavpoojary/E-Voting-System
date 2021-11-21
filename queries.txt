@@ -1,0 +1,25 @@
+
+create schema evotingdb;
+use evotingdb;
+create table user (email varchar(100) primary key, password text, addr text, role text, fname text, lname text, gender text, mobile text);
+
+create table kyc (email varchar(100) references user(email), voter_card text, status text, entry_time timestamp, update_time timestamp default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP);
+
+create table admin (adminid text, adminpassword text);
+
+create table assembly (assembly_id varchar(100) primary key, assembly_name text);
+
+create table assembly_user (email text, assembly_id text);
+
+create table party (party_id varchar(100) primary key, party_name text, party_logo text);
+
+create table contestant (contestant_id varchar(100), contestant_name text, contestant_photo text, contestant_details text, party_id text); 
+
+create table election (election_id varchar(100) primary key, title text, description text, assembly_id text, election_date timestamp, start_time timestamp default CURRENT_TIMESTAMP, end_time timestamp default CURRENT_TIMESTAMP, status text);
+
+create table election_contestant (election_id text, contestant_id text);
+
+create table nodes (name text, url text);
+
+create table participation (election_id varchar(100), email varchar(100));
+
